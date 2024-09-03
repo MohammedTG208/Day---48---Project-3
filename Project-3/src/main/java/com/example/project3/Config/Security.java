@@ -34,10 +34,10 @@ public class Security {
                 .authenticationProvider(authenticationProvider())
                 .authorizeRequests()
                 .requestMatchers("/api/v1/cus/register","/api/v1/emp/register").permitAll()
-                .requestMatchers("/api/v1/cus/update/","/api/v1/cus/delete","/api/v1/user/get-user-info","/api/v1/acc/add-new-account","/api/v1/acc/delete","/api/v1/acc/update","/api/v1/acc/active-account","/api/v1/acc/transfer-to/","/api/v1/acc/deposit/","/api/v1/acc/Withdraw/","/api/v1/acc/get/cus/account").hasAuthority("CUSTOMER")
+                .requestMatchers("/api/v1/cus/update/","/api/v1/cus/delete","/api/v1/acc/add-new-account","/api/v1/acc/delete","/api/v1/acc/update","/api/v1/acc/active-account","/api/v1/acc/transfer-to/","/api/v1/acc/deposit/","/api/v1/acc/Withdraw/","/api/v1/acc/get/cus/account").hasAuthority("CUSTOMER")
                 .requestMatchers("/api/v1/cus/get-all-cus-info","/api/v1/user/get-all-users-for-admin","/api/v1/emp/get-all-for-admin","/api/v1/emp/delete/","/api/v1/acc/block-account/","/api/v1/emp/delete/").hasAuthority("ADMIN")
-                //here is duplicate check wean get the data
                 .requestMatchers("/api/v1/emp/update").hasAuthority("EMPLOYEE")
+                .requestMatchers("/api/v1/user/get-user-info").hasAnyRole("EMPLOYEE", "CUSTOMER")
                 .anyRequest().authenticated()
                 .and()
                 .logout()
